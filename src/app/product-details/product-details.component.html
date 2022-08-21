@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-6">
+            <img src="{{product?.url}}" width="80%" height="250px">
+        </div>
+        <div class="col-6">
+            <h5>{{product?.name}}</h5>
+            <h6>{{product?.price | currency}}</h6>
+            <p>{{product?.description}}</p>
+            <form (ngSubmit)="addToCart(product,s.value)">
+                <select #s name="countOfProducts">
+                    <ng-container *ngFor="let n of numOfItems;let index=index;">
+                        <option [selected]="amount===index+1"  value={{index+1}}>{{index+1}}</option>
+                    </ng-container>
+                </select><br>
+                <input type="submit" class="btn btn-primary mt-1" value="Add to cart">
+            </form>
+            <a routerLink="">back to product list</a>
+        </div>
+    </div>
+</div>

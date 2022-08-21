@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-6 text-center">
+            <ng-container *ngFor="let i of items">
+                <div class="row pt-5">
+                    <div class="col-6">
+                        <img src="{{i.product?.url}}" width="80%" height="100px">
+                    </div>
+                    <div class="col-6">
+                        <h5>{{i.product?.name}}</h5>
+                        <h6>{{i.product?.price | currency}}</h6>
+                        
+                            amount : 
+                            <select #s name="countOfProducts" (change)="addToCart(i.product,s.value)">
+                                <ng-container *ngFor="let n of numOfItems;let index=index;">
+                                    <option [selected]="i.count===index+1"  value={{index+1}}>{{index+1}}</option>
+                                </ng-container>
+                            </select><br>
+                        
+                    </div>
+                </div>
+            </ng-container>
+            <h4 class="mt-3">Total : {{total|currency}}</h4>
+        </div>
+        <div class="col-6">
+            <form #form="ngForm" (ngSubmit)="confirm()" >
+                <p>
+                    Full name <input required
+                         [(ngModel)]="fullName"
+                          placeholder="min 3 characters" 
+                          type="text" 
+                          minlength="3" 
+                          name="fullName">
+                </p>
+                <p>
+                    Address <input required 
+                                   [(ngModel)]="address" 
+                                   placeholder="min 6 characters" 
+                                   type="text" 
+                                   minlength="6" 
+                                   name="address">
+                </p>
+                <p>
+                    credit card number <input required 
+                                            [(ngModel)]="credit" 
+                                            placeholder="16-digits" 
+                                            type="text" 
+                                            minlength="16"
+                                          
+                                            name="credit">
+                </p>
+                <p>we'll never share your payment info</p>
+                <input type="submit" value="Submit" [disabled]="form.invalid">
+            </form>
+        </div>
+    </div>
+</div>
